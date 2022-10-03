@@ -1,9 +1,8 @@
-import Vue from 'vue'
+
 import VueI18n from 'vue-i18n'
 
-Vue.use(VueI18n)
 function loadLocaleMessages () {
-  const locales = require.context('../languages', true, /[A-Za-z0-9-_,\s]+\.json$/i)
+  const locales = ()=> require.context('../languages', true, /[A-Za-z0-9-_,\s]+\.json$/i)
   const messages = {}
   locales.keys().forEach(key => {
     const matched = key.match(/([A-Za-z0-9-_]+)\./i)
@@ -14,14 +13,16 @@ function loadLocaleMessages () {
   })
   return messages
 }
+
 let currentLang = 'uz'
 let defaultLang = localStorage.getItem('language');
 if(defaultLang){
   currentLang = defaultLang
 }
-export default new VueI18n({
+export default i18n =  VueI18n.createI18n ({
   locale: currentLang,
   fallbackLocale: 'uz',
   formatFallbackMessages: true,
-  messages: loadLocaleMessages(),
+  messages:loadLocaleMessages()  ,
 })
+

@@ -64,7 +64,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "Pinia";
+import { mapActions, mapState  } from "Pinia";
+import { useCounterStore } from '../pinia/index'
 export default {
   data() {
     return {
@@ -76,10 +77,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getSite", "getCategories", "getLang"]),
+    ...mapState (useCounterStore,["getSite", "getCategories", "getLang"]),
   },
   methods: {
-    ...mapActions(["fetchSite", "fetchCategories", "fetchLang"]),
+    ...mapActions(useCounterStore,["fetchSite", "fetchCategories", "fetchLang"]),
     setLocale() {
       this.isActive = !this.isActive;
       if (this.isActive && this.getLang != "ru") {

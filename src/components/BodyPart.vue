@@ -163,6 +163,7 @@
 </template>
 <script>
 import { mapActions } from "Pinia";
+import { useCounterStore } from '../pinia/index'
 import useVuelidate from "../../node_modules/@vuelidate/core";
 import { required, minLength } from "../../node_modules/@vuelidate/validators";
 export default {
@@ -187,7 +188,7 @@ export default {
   },
   mounted() {},
   methods: {
-    ...mapActions(["fetchConsultation", "fetchBotConsultation"]),
+    ...mapActions(useCounterStore,["fetchConsultation", "fetchBotConsultation"]),
     save() {
       this.disabled = true
       this.v$.$validate();

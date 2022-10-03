@@ -156,9 +156,10 @@
 
 <script>
 import PulseLoader from "vue-spinner/src/PulseLoader.vue";
-import { mapActions, mapGetters } from "Pinia";
+import { mapActions, mapState } from "Pinia";
 import useVuelidate from "../../node_modules/@vuelidate/core";
 import { required, minLength } from "../../node_modules/@vuelidate/validators";
+import { useCounterStore } from '../pinia/index'
 // import { required, minLength } from "vuelidate/validators";
 export default {
   components: {
@@ -196,15 +197,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getProducts", "getCategories", "getLang"]),
+    ...mapState(useCounterStore,["getProducts", "getCategories", "getLang"]),
   },
   methods: {
-    ...mapActions([
-      "fetchCategories",
-      "fetchProducts",
-      "fetchOrder",
-      "fetchBotOrder",
-    ]),
+    ...mapActions(useCounterStore,["fetchCategories","fetchProducts","fetchOrder","fetchBotOrder",]),
     BModal() {
       if (this.bgModal) {
         this.successModal = false;

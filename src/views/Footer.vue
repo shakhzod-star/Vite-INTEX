@@ -79,7 +79,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "Pinia";
+import { mapActions, mapState } from "Pinia";
+import { useCounterStore } from '../pinia/index'
 import useVuelidate from "../../node_modules/@vuelidate/core";
 import { required, minLength } from "../../node_modules/@vuelidate/validators";
 export default {
@@ -102,10 +103,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getSite", "getLang"]),
+    ...mapState(useCounterStore,["getSite", "getLang"]),
   },
   methods: {
-    ...mapActions(["fetchConsultation", "fetchSite", "fetchBotConsultation"]),
+    ...mapActions(useCounterStore,["fetchConsultation", "fetchSite", "fetchBotConsultation"]),
     save() {
       this.disabled = true
       this.v$.$validate();
