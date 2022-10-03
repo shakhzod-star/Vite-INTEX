@@ -1,7 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import { createPinia } from 'pinia';
+console.log(11111);
+import pinia from './pinia';
 import { VueMaskDirective } from 'v-mask'
 import AOS from 'aos'
 import './assets/style/app.scss'
@@ -12,11 +13,11 @@ const app =   createApp(App)
 app.config.productionTip = false
 
 // USE 
-app.use(i18n)
-app.use(AOS.init())
-app.use(createPinia())
+
 app.use(router)
-app.use(AOS)
+app.use(pinia)
+app.use(AOS.init())
+app.use(i18n)
 
 // directive
 

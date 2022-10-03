@@ -157,8 +157,8 @@
 <script>
 import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 import { mapActions, mapState } from "Pinia";
-import useVuelidate from "../../node_modules/@vuelidate/core";
-import { required, minLength } from "../../node_modules/@vuelidate/validators";
+import useVuelidate from "@vuelidate/core";
+import { required, minLength } from "@vuelidate/validators";
 import { useCounterStore } from '../pinia/index'
 // import { required, minLength } from "vuelidate/validators";
 export default {
