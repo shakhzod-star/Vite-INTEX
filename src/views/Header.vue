@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <img class="mainPhoto" src="./assets/img/mainPhoto.jpg" alt="mainPhoto" />
+    <img class="mainPhoto" src="../assets/img/mainPhoto.jpg" alt="mainPhoto" />
   </div>
 </template>
 <script>

@@ -13,10 +13,10 @@
             site.phone_number
           }}</a>
           <a :href="site.telegram_link" target="_blank"
-            ><img src="./assets/icons/social/telegram.svg" alt="telegram"
+            ><img src="../assets/icons/social/telegram.svg" alt="telegram"
           /></a>
           <a :href="site.instagram_link" target="_blank"
-            ><img src="./assets/icons/social/instagram.svg" alt="instagram"
+            ><img src="../assets/icons/social/instagram.svg" alt="instagram"
           /></a>
           <div
             style="text-transform: uppercase"
@@ -26,7 +26,7 @@
             {{ getLang ? getLang : "uz" }}
           </div>
           <button class="burger" @click="BurgerActive = !BurgerActive">
-            <img src="./assets/icons/Modal/burger.svg" alt="burger" />
+            <img src="../assets/icons/Modal/burger.svg" alt="burger" />
           </button>
         </div>
       </div>
@@ -42,15 +42,15 @@
       </ul>
       <div class="socials">
         <a class="phone" :href="`tel:${site.phone_number}`">
-          <img src="./assets/icons/social/phonee.svg" alt="phone" />
+          <img src="../assets/icons/social/phonee.svg" alt="phone" />
           {{ $t("call") }}
         </a>
         <a class="social" :href="site.telegram_link" target="_blank">
-          <img src="./assets/icons/social/telegramm.svg" alt="telegram" />
+          <img src="../assets/icons/social/telegramm.svg" alt="telegram" />
           {{ $t("telegram") }}
         </a>
         <a class="social" :href="site.instagram_link" target="_blank">
-          <img src="./assets/icons/social/instagramm.svg" alt="instagram" />
+          <img src="../assets/icons/social/instagramm.svg" alt="instagram" />
           {{ $t("instagram") }}
         </a>
       </div>
@@ -93,6 +93,7 @@ export default {
     },
   },
   mounted() {
+      console.log(this.getCategories);
     this.fetchSite().then(res => this.site = res).catch(error => console.log(error));
     let locale = localStorage.getItem("language");
     if (locale == null) {

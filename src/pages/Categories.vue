@@ -10,7 +10,7 @@
       v-else
       class="all"
       :id="category.id"
-      v-for="category in categoryies"
+      v-for="category in categories"
       :key="category.index"
     >
       <div class="bg">
@@ -68,7 +68,7 @@
           <div v-if="carcasModal" class="carcasModal">
             <img
               class="cross"
-              src="./assets/icons/Modal/cross.png"
+              src="../assets/icons/Modal/cross.png"
               alt="cross"
               @click="BModal"
             />
@@ -137,12 +137,12 @@
             <img
               @click="BModal"
               class="cross"
-              src="./assets/icons/Modal/cross.png"
+              src="../assets/icons/Modal/cross.png"
               alt="cross"
             />
             <img
               class="success"
-              src="./assets/icons/Modal/success.png"
+              src="../assets/icons/Modal/success.png"
               alt="success"
             />
             <p class="text">{{ $t("thanks") }} !</p>
@@ -159,8 +159,7 @@ import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 import { mapActions, mapState } from "Pinia";
 import useVuelidate from "@vuelidate/core";
 import { required, minLength } from "@vuelidate/validators";
-import { useCounterStore } from '../pinia/index'
-// import { required, minLength } from "vuelidate/validators";
+import { useCounterStore, useProducts } from "../pinia/index";
 export default {
   components: {
     PulseLoader,
@@ -174,10 +173,9 @@ export default {
       carcasModal: false,
       color: "#009398",
       bgModal: false,
+      categories : [],
       successModal: false,
-      products: [],
-      categoryies: [],
-      disabled : false ,
+      disabled: false,
       form: {
         productId: "",
         name: "",
@@ -197,10 +195,17 @@ export default {
     };
   },
   computed: {
-    ...mapState(useCounterStore,["getProducts", "getCategories", "getLang"]),
+    ...mapState(useCounterStore, ["getCategories", "getLang"]),
+    ...mapState(useProducts, ["getProducts"]),
+    // ...mapState(useCounterStore ,{ categories  :   "getCategories" , categories : (store) => store.getCategories  })
   },
   methods: {
-    ...mapActions(useCounterStore,["fetchCategories","fetchProducts","fetchOrder","fetchBotOrder",]),
+    ...mapActions(useCounterStore, [
+      "fetchCategories",
+      "fetchOrder",
+      "fetchBotOrder",
+    ]),
+    ...mapActions(useProducts, ["fetchProducts"]),
     BModal() {
       if (this.bgModal) {
         this.successModal = false;
@@ -222,7 +227,7 @@ export default {
       };
     },
     save() {
-      this.disabled = true
+      this.disabled = true;
       this.v$.$validate();
       if (!this.v$.$error) {
         let newForm = {
@@ -242,7 +247,7 @@ export default {
               this.v$.form.number = false;
               this.v$.form.address = false;
               this.successModal = true;
-              this.disabled = false
+              this.disabled = false;
               setTimeout(() => {
                 this.successModal = false;
                 this.bgModal = false;
@@ -257,16 +262,32 @@ export default {
     },
   },
   async mounted() {
-    await this.fetchProducts();
-    this.fetchCategories().then((res) => {
-      this.categoryies = res;
-      this.categoryies.map((v) => {
-        const cater = this.getProducts.filter((va) => v.id == va.category_id);
-        v.products = cater;
-        this.loading = false;
-        return v;
-      });
-    });
+
+    // console.clear()
+    // const store = useCounterStore();
+  await this.fetchProducts();
+  await this.fetchCategories()
+    // console.clear()
+    this.categories = this.getCategories
+    // console.log( this.categories);
+    console.log(this.categories);
+      this.categories.map((v) => {
+          const cater =  JSON.parse(JSON.stringify(this.getProducts)).filter((va) => v.id == va.category_id); 
+          v.products = cater;
+          this.loading = false;
+          return v;
+        });
+        console.log(this.categories);
+    //    this.fetchCategories().then((res) => {
+    //   this.categoryies = res;
+    //   console.log(this.getProducts);
+    //   this.categoryies.map((v) => {
+    //     const cater = this.getProducts.filter((va) => v.id == va.category_id);
+    //     v.products = cater;
+    //     this.loading = false;
+    //     return v;
+    //   });
+    // });
   },
 };
 </script>
@@ -302,7 +323,7 @@ export default {
     border-radius: 0px 35px 35px 35px;
     position: relative;
     max-width: 340px;
-    
+
     .status {
       position: absolute;
       top: 0;
@@ -410,9 +431,8 @@ export default {
   .pool:nth-child(3n) {
     margin-right: 0;
   }
-  
 }
-@media(max-width:800px){
+@media (max-width: 800px) {
   .pools .aos-animate:last-child .pool {
     margin-bottom: 0;
   }
@@ -452,9 +472,9 @@ export default {
           }
         }
         .order {
-           white-space: nowrap;
-            font-size: 14px;
-            line-height: 15px;
+          white-space: nowrap;
+          font-size: 14px;
+          line-height: 15px;
         }
       }
     }
