@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
-// import  axios  from "axios";
+import { useProducts } from "./products"
+import  axios  from "axios";
 export const useCounterStore = defineStore("counter", {
   state: () => ({
     categories: [],
-    products: [],
     site: {},
     locale: "uz",
     backend_url: "https://market-index.herokuapp.com/",
@@ -11,6 +11,16 @@ export const useCounterStore = defineStore("counter", {
     chatId: -723987438,
     // backend_url: 'http://31.44.6.77:5555/'
   }),
+  getters:{
+    getItems(){
+      const state = useProducts()
+        const { products } = state 
+    return this.categories.map(category=> ({...category,
+      products:products.filter(product => product.category_id == category.id)
+    }));
+  
+  }
+  },
   actions: {
     fetchBotOrder(data) {
       let allUserInfo = `Name: ${data.name}   \n  Number: ${data.phoneNumber}   \n  Address: ${data.address} `;
@@ -22,7 +32,7 @@ export const useCounterStore = defineStore("counter", {
           .then((res) => resolve(res))
           .catch((e) => {
             console.error(e);
-            reject();
+            reject()
           });
       });
     },
@@ -43,17 +53,15 @@ export const useCounterStore = defineStore("counter", {
       });
     },
     fetchCategories() {
-      return new Promise((resolve, reject) => {
-        axios
+      const products = useProducts()
+      axios
           .get(this.backend_url + "api/home/category")
-          .then((res) => {
-              this.updateCategory(res.data.data);
-              resolve(res?.data?.data);
+          .then(({data}) => {
+            products.fetchProducts()
+            this.categories= data.data
+          }).catch((e) => {
+            console.log('err',e)
           })
-          .catch((e) => {
-            reject(e);
-          });
-      });
     },
     fetchSite(ctx) {
       return new Promise((resolve, reject) => {
@@ -106,66 +114,16 @@ export const useCounterStore = defineStore("counter", {
     },
 
     fetchLang(data) {
-      this.updateLang(data);
+        
     },
     updateLang(payload) {
+
       this.locale = payload.locale;
-    },
-    updateCategory(payload) {
-      console.log(this.categories);
-      console.log(payload);
-      this.categories = [...payload];
-      console.log(this.categories);
+      console.log(this.locale);
     },
     updateSite(payload) {
       this.site = payload;
     },
    
-  },
-  getters: {
-    getCategories(state) {
-      return state.categories;
-    },
-    getProducts(state) {
-      return state.products;
-    },
-    getSite(state) {
-      return state.site;
-    },
-    getLang(state) {
-      return state.locale;
-    },
-  },
-});
-
-export const useProducts = defineStore("products", {
-  state: () => ({
-    products : [],
-    backend_url: "https://market-index.herokuapp.com/",
-
-  
-  }),
-  actions: {
-    fetchProducts(ctx) {
-      return new Promise((resolve, reject) => {
-        axios
-          .get(this.backend_url + "api/home/product")
-          .then((res) => {
-            this.updateProduct(res.data.data);
-            resolve(res.data.data);
-          })
-          .catch((e) => {
-            reject(e);
-          });
-      });
-    },
-    updateProduct(payload) {
-      this.products = payload
-    },
-  },
-  getters: {
-    getProducts(state) {
-      return state.products;
-    },
-  },
+  }
 });

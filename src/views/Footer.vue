@@ -33,24 +33,24 @@
             <p>{{ $t("workTime") }}</p>
           </div>
           <div class="relax">
-            {{     getSite[`work_time_${getLang}`]  }}
+            {{     site[`work_time_${locale}`]  }}
           </div>
           <div class="social">
-            <a :href="`tel:${getSite.phone_number}`"
+            <a :href="`tel:${site.phone_number}`"
               ><img src="../assets/icons/social/phone.png" alt="phone"
             /></a>
-            <a :href="getSite.telegram_link" target="_blank">
+            <a :href="site.telegram_link" target="_blank">
               <img src="../assets/icons/social/telegram.svg" alt="telegram"
             /></a>
-            <a :href="getSite.instagram_link" target="_blank"
+            <a :href="site.instagram_link" target="_blank"
               ><img src="../assets/icons/social/instagram.svg" alt="instagram"
             /></a>
           </div>
         </div>
         <ul class="address">
           <li>Intex-market.uz</li>
-          <li>{{ getSite.phone_number }}</li>
-          <li>{{ getSite[`address_${getLang}`] }}</li>
+          <li>{{ site.phone_number }}</li>
+          <li>{{ site[`address_${locale}`] }}</li>
           <li>{{ $t("allReserved") }}.</li>
         </ul>
       </div>
@@ -79,8 +79,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "Pinia";
-import { useCounterStore } from '../pinia/index'
+import { mapActions, mapState } from "pinia";
+import { useCounterStore } from '../store/categories'
 import useVuelidate from "../../node_modules/@vuelidate/core";
 import { required, minLength } from "../../node_modules/@vuelidate/validators";
 export default {
@@ -103,7 +103,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(useCounterStore,["getSite", "getLang"]),
+    ...mapState(useCounterStore,["site", "locale"]),
   },
   methods: {
     ...mapActions(useCounterStore,["fetchConsultation", "fetchSite", "fetchBotConsultation"]),

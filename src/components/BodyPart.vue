@@ -162,8 +162,8 @@
   </div>
 </template>
 <script>
-import { mapActions } from "Pinia";
-import { useCounterStore } from '../pinia/index'
+import { mapActions } from "pinia";
+import { useCounterStore } from '../store/categories'
 import useVuelidate from "../../node_modules/@vuelidate/core";
 import { required, minLength } from "../../node_modules/@vuelidate/validators";
 export default {

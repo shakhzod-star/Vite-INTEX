@@ -64,8 +64,8 @@
 </template>
 
 <script>
-import { mapActions, mapState  } from "Pinia";
-import { useCounterStore } from '../pinia/index'
+import { mapActions, mapState  } from "pinia";
+import { useCounterStore } from '../store/categories'
 export default {
   data() {
     return {

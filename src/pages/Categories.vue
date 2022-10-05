@@ -10,11 +10,11 @@
       v-else
       class="all"
       :id="category.id"
-      v-for="category in categories"
+      v-for="category in getItems"
       :key="category.index"
     >
       <div class="bg">
-        <h2 class="Title">{{ category[`name_${getLang}`] }}</h2>
+        <h2 class="Title">{{ category[`name_${locale}`] }}</h2>
       </div>
       <div class="pools">
         <div
@@ -37,7 +37,7 @@
               v-if="product.status_ru != ''"
               >{{ product.status_ru }}</span
             >
-            <div class="poolName">{{ product[`frame_${getLang}`] }}</div>
+            <div class="poolName">{{ product[`frame_${locale}`] }}</div>
             <div class="box">
               <img
                 class="categoriesImg"
@@ -73,7 +73,7 @@
               @click="BModal"
             />
             <div class="picture">
-              <p class="text">{{ orderItem[`frame_${getLang}`] }}</p>
+              <p class="text">{{ orderItem[`frame_${locale}`] }}</p>
               <img
                 crossorigin="anonymous"
                 :src="orderItem.image"
@@ -156,10 +156,10 @@
 
 <script>
 import PulseLoader from "vue-spinner/src/PulseLoader.vue";
-import { mapActions, mapState } from "Pinia";
+import { mapActions, mapState } from "pinia";
 import useVuelidate from "@vuelidate/core";
 import { required, minLength } from "@vuelidate/validators";
-import { useCounterStore, useProducts } from "../pinia/index";
+import { useCounterStore } from "../store/categories";
 export default {
   components: {
     PulseLoader,
@@ -169,11 +169,10 @@ export default {
   },
   data() {
     return {
-      loading: true,
+      loading: false,
       carcasModal: false,
       color: "#009398",
-      bgModal: false,
-      categories : [],
+      bgModal: false, 
       successModal: false,
       disabled: false,
       form: {
@@ -195,9 +194,8 @@ export default {
     };
   },
   computed: {
-    ...mapState(useCounterStore, ["getCategories", "getLang"]),
-    ...mapState(useProducts, ["getProducts"]),
-    // ...mapState(useCounterStore ,{ categories  :   "getCategories" , categories : (store) => store.getCategories  })
+    ...mapState(useCounterStore, ["getItems","categories","locale"])
+
   },
   methods: {
     ...mapActions(useCounterStore, [
@@ -205,7 +203,6 @@ export default {
       "fetchOrder",
       "fetchBotOrder",
     ]),
-    ...mapActions(useProducts, ["fetchProducts"]),
     BModal() {
       if (this.bgModal) {
         this.successModal = false;
@@ -261,33 +258,9 @@ export default {
       }
     },
   },
-  async mounted() {
-
-    // console.clear()
-    // const store = useCounterStore();
-  await this.fetchProducts();
-  await this.fetchCategories()
-    // console.clear()
-    this.categories = this.getCategories
-    // console.log( this.categories);
-    console.log(this.categories);
-      this.categories.map((v) => {
-          const cater =  JSON.parse(JSON.stringify(this.getProducts)).filter((va) => v.id == va.category_id); 
-          v.products = cater;
-          this.loading = false;
-          return v;
-        });
-        console.log(this.categories);
-    //    this.fetchCategories().then((res) => {
-    //   this.categoryies = res;
-    //   console.log(this.getProducts);
-    //   this.categoryies.map((v) => {
-    //     const cater = this.getProducts.filter((va) => v.id == va.category_id);
-    //     v.products = cater;
-    //     this.loading = false;
-    //     return v;
-    //   });
-    // });
+  
+   mounted() {
+   this.fetchCategories()
   },
 };
 </script>
