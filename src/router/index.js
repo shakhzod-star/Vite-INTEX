@@ -7,11 +7,11 @@ const routes = [
     name: 'home',
     component: Page
   },
-  // {
-  //   path: '/:id',
-  //   name: 'homeId',
-  //   component: Page
-  // },
+  {
+    path: '/:id',
+    name: 'homeId',
+    component: Page
+  },
 ]
 
 const router = createRouter({

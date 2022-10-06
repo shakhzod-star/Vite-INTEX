@@ -4,8 +4,8 @@
       <div class="nav">
         <a href="#" class="logo"> INTEX-SHOP.UZ </a>
         <ul class="navList">
-          <li v-for="list in getCategories" :key="list.index">
-            <a :href="'#' + list.id"> {{ list[`name_${getLang}`] }}</a>
+          <li v-for="list in getItems" :key="list.index">
+            <a :href="'#' + list.id"> {{ list[`name_${locale}`] }}</a>
           </li>
         </ul>
         <div class="phone_social">
@@ -23,7 +23,7 @@
             class="lang"
             @click="setLocale"
           >
-            {{ getLang ? getLang : "uz" }}
+            {{ locale ? locale : "uz" }}
           </div>
           <button class="burger" @click="BurgerActive = !BurgerActive">
             <img src="../assets/icons/Modal/burger.svg" alt="burger" />
@@ -34,9 +34,9 @@
     <div class="burgerMenu" :class="{ active: BurgerActive }">
       <a href="#" class="intex">INTEX-SHOP.UZ</a>
       <ul class="navList">
-        <li class="list" v-for="list in getCategories" :key="list.index">
+        <li class="list" v-for="list in getItems" :key="list.index">
           <a :href="'#' + list.id" @click="BurgerActive = !BurgerActive">{{
-            list[`name_${getLang}`]
+            list[`name_${locale}`]
           }}</a>
         </li>
       </ul>
@@ -77,23 +77,22 @@ export default {
     };
   },
   computed: {
-    ...mapState (useCounterStore,["getSite", "getCategories", "getLang"]),
+    ...mapState (useCounterStore,["getSite", "getItems", "locale"]),
   },
   methods: {
     ...mapActions(useCounterStore,["fetchSite", "fetchCategories", "fetchLang"]),
     setLocale() {
       this.isActive = !this.isActive;
-      if (this.isActive && this.getLang != "ru") {
+      if (this.isActive && this.locale != "ru") {
         this.fetchLang("ru");
       } else {
         this.fetchLang("uz");
       }
-      this.$i18n.locale = this.getLang;
-      localStorage.setItem("language", this.getLang);
+      this.$i18n.locale = this.locale;
+      localStorage.setItem("language", this.locale);
     },
   },
   mounted() {
-      console.log(this.getCategories);
     this.fetchSite().then(res => this.site = res).catch(error => console.log(error));
     let locale = localStorage.getItem("language");
     if (locale == null) {
