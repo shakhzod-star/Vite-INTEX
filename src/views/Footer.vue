@@ -2,35 +2,35 @@
   <div class="bg">
     <div class="footer">
       <form @submit.prevent="save">
-        <h2>{{ $t("freeConsultation") }}</h2>
+        <h2>{{ $t("message.freeConsultation") }}</h2>
         <input
           v-model.trim="form.name"
-          :aria-label="$t('name')"
+          :aria-label="$t('message.name')"
           :class="v$.form.name.$error ? 'form-error' : ''"
           type="text"
-          :placeholder="$t('name')"
+          :placeholder="$t('message.name')"
         />
         <p class="p-valid" :style="v$.form.name.$error ? 'opacity: 1' : ''">
-          {{ $t("setName") }}
+          {{ $t("message.setName") }}
         </p>
         <input
           type="text"
           v-mask="'+998## #######'"
           v-model.trim="form.number"
-          :placeholder="$t('number')"
-          :aria-label="$t('number')"
+          :placeholder="$t('message.number')"
+          :aria-label="$t('message.number')"
           :class="v$.form.number.$error ? 'form-error' : ''"
         />
         <p class="p-valid" :style="v$.form.number.$error ? 'opacity: 1' : ''">
-          {{ $t("setNumber") }}
+          {{ $t("message.setNumber") }}
         </p>
-        <button class="consult" :disabled="disabled">{{ $t("toConsult") }}</button>
+        <button class="consult" :disabled="disabled">{{ $t("message.toConsult") }}</button>
       </form>
       <div class="dateAdd">
         <div class="DateTime">
           <div class="time">
             <img src="../assets/img/time.png" alt="time" />
-            <p>{{ $t("workTime") }}</p>
+            <p>{{ $t("message.workTime") }}</p>
           </div>
           <div class="relax">
             {{     site[`work_time_${locale}`]  }}
@@ -51,7 +51,7 @@
           <li>Intex-market.uz</li>
           <li>{{ site.phone_number }}</li>
           <li>{{ site[`address_${locale}`] }}</li>
-          <li>{{ $t("allReserved") }}.</li>
+          <li>{{ $t("message.allReserved") }}.</li>
         </ul>
       </div>
       <div
@@ -71,8 +71,8 @@
           src="../assets/icons/Modal/success.png"
           alt="success"
         />
-        <p class="text">{{ $t("thanks") }} !</p>
-        <span class="message"> {{ $t("yourOrderFramed") }} </span>
+        <p class="text">{{ $t("message.thanks") }} !</p>
+        <span class="message"> {{ $t("message.yourOrderFramed") }} </span>
       </div>
     </div>
   </div>

@@ -50,8 +50,8 @@
             <!-- <div class="poolComment" v-if="product.comment" >{{ product.comment }}</div> -->
             <div class="price_order">
               <div class="price">
-                <span>{{ formatNumber(product.price) }} {{ $t("money") }}</span>
-                <p>{{ formatNumber(product.sale_price) }} {{ $t("money") }}</p>
+                <span>{{ formatNumber(product.price) }} {{ $t("message.money") }}</span>
+                <p>{{ formatNumber(product.sale_price) }} {{ $t("message.money") }}</p>
               </div>
               <button
                 class="order"
@@ -59,7 +59,7 @@
                 @click="open(product)"
                 :disabled="product.status_id == 3"
               >
-                {{ $t("order") }}
+                {{ $t("message.order") }}
               </button>
             </div>
           </div>
@@ -80,7 +80,7 @@
                 :alt="orderItem.image"
               />
               <span class="sum"
-                >{{ formatNumber(orderItem.sale_price) }} {{ $t("money") }}
+                >{{ formatNumber(orderItem.sale_price) }} {{ $t("message.money") }}
               </span>
             </div>
             <form class="info" @submit.prevent="save">
@@ -88,45 +88,45 @@
                 v-model.trim="form.name"
                 :class="v$.form.name.$error ? 'form-error' : ''"
                 type="text"
-                :placeholder="$t('name')"
-                :aria-label="$t('name')"
+                :placeholder="$t('message.name')"
+                :aria-label="$t('message.name')"
               />
               <p
                 class="p-valid"
                 :style="v$.form.name.$error ? 'opacity: 1' : ''"
                 :class="v$.form.name.$error ? 'error' : ''"
               >
-                {{ $t("setName") }}
+                {{ $t("message.setName") }}
               </p>
               <input
                 type="text"
                 v-mask="'+998## #######'"
                 v-model.trim="form.number"
-                :placeholder="$t('number')"
-                :aria-label="$t('number')"
+                :placeholder="$t('message.number')"
+                :aria-label="$t('message.number')"
                 :class="v$.form.number.$error ? 'form-error' : ''"
               />
               <p
                 class="p-valid"
                 :style="v$.form.number.$error ? 'opacity: 1' : ''"
               >
-                {{ $t("setNumber") }}
+                {{ $t("message.setNumber") }}
               </p>
               <input
                 v-model.trim="form.address"
                 :class="v$.form.address.$error ? 'form-error' : ''"
                 type="text"
-                :placeholder="$t('yourAddress')"
-                :aria-label="$t('yourAddress')"
+                :placeholder="$t('message.yourAddress')"
+                :aria-label="$t('message.yourAddress')"
               />
               <p
                 class="p-valid"
                 :style="v$.form.address.$error ? 'opacity: 1' : ''"
               >
-                {{ $t("setName") }}
+                {{ $t("message.setName") }}
               </p>
               <button class="order" :disabled="disabled">
-                {{ $t("order") }}
+                {{ $t("message.order") }}
               </button>
             </form>
           </div>
@@ -145,8 +145,8 @@
               src="../assets/icons/Modal/success.png"
               alt="success"
             />
-            <p class="text">{{ $t("thanks") }} !</p>
-            <span class="message"> {{ $t("orderSuccess") }} .</span>
+            <p class="text">{{ $t("message.thanks") }} !</p>
+            <span class="message"> {{ $t("message.orderSuccess") }} .</span>
           </div>
         </Transition>
       </div>
@@ -194,7 +194,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(useCounterStore, ["getItems","categories","locale"])
+    ...mapState(useCounterStore, ["getItems","categories","locale","order"])
 
   },
   methods: {
@@ -223,7 +223,7 @@ export default {
         sale_price: product.sale_price,
       };
     },
-    save() {
+     save() {
       this.disabled = true;
       this.v$.$validate();
       if (!this.v$.$error) {
@@ -233,8 +233,7 @@ export default {
           phoneNumber: this.form.number.slice(4),
           address: this.form.address,
         };
-        this.fetchOrder(newForm)
-          .then((res) => {
+        this.fetchOrder(newForm).then((res) => {
             if (res.status == 201) {
               this.carcasModal = false;
               this.form.name = "";

@@ -2,10 +2,10 @@
   <div>
     <div class="bg">
       <div class="modalPart">
-        <h2 class="Title">{{ $t("freeDeliver") }}</h2>
-        <p class="text">{{ $t("orderFreeIn") }} {{ $t("orderPayOut") }}</p>
+        <h2 class="Title">{{ $t("message.freeDeliver") }}</h2>
+        <p class="text">{{ $t("message.orderFreeIn") }} {{ $t("message.orderPayOut") }}</p>
         <button  class="add" @click="modal = !modal">
-          {{ $t("checkout")}} 
+          {{ $t("message.checkout")}} 
         </button>
       </div>
       <div v-if="modal || successModal" class="bgModal" @click="outClick"></div>
@@ -22,37 +22,37 @@
             src="../assets/icons/Modal/feedback.png"
             alt="feedback"
           />
-          <p class="text">{{ $t("getConsult") }}</p>
+          <p class="text">{{ $t("message.getConsult") }}</p>
           <input
             :class="v$.form.name.$error ? 'form-error' : ''"
             type="text"
             v-model.trim="form.name"
-            :placeholder="$t('yourName')"
-            :aria-label="$t('yourName')"
+            :placeholder="$t('message.yourName')"
+            :aria-label="$t('message.yourName')"
           />
           <p
             class="p-valid"
             :style="v$.form.name.$error ? 'opacity: 1' : ''"
             :class="v$.form.name.$error ? 'error' : ''"
           >
-            {{ $t("setName") }}
+            {{ $t("message.setName") }}
           </p>
           <input
             :class="v$.form.number.$error ? 'form-error' : ''"
             v-mask="'+998## #######'"
             v-model.trim="form.number"
             type="text"
-            :placeholder="$t('yourNumber')"
-            :aria-label="$t('yourNumber')"
+            :placeholder="$t('message.yourNumber')"
+            :aria-label="$t('message.yourNumber')"
           />
           <p
             class="p-valid"
             :style="v$.form.number.$error ? 'opacity: 1' : ''"
             :class="v$.form.number.$error ? 'error' : ''"
           >
-            {{ $t("setNumber") }}
+            {{ $t("message.setNumber") }}
           </p>
-          <button class="order" :disabled="disabled">{{ $t("order") }}</button>
+          <button class="order" :disabled="disabled">{{ $t("message.order") }}</button>
         </form>
       </Transition>
       <Transition name="bounce" >
@@ -68,23 +68,23 @@
             src="../assets/icons/Modal/success.png"
             alt="success"
           />
-          <p class="text">{{ $t("thanks") }} !</p>
-          <span class="message"> {{ $t("orderSuccess") }} .</span>
+          <p class="text">{{ $t("message.thanks") }} !</p>
+          <span class="message"> {{ $t("message.orderSuccess") }} .</span>
         </div>
       </Transition>
     </div>
     <div class="ours">
       <div class="ours_clients">
-        <h2>{{ $t("valuesClients") }}</h2>
+        <h2>{{ $t("message.valuesClients") }}</h2>
         <div class="ours_link">
           <div class="box">
             <img src="../assets/img/slide/slider2.png" alt="slider" />
             <ul>
               <li>
-                <span>{{ $t("experience") }}</span>
+                <span>{{ $t("message.experience") }}</span>
               </li>
               <li>
-                <p>{{ $t("professionalismEmployees") }}</p>
+                <p>{{ $t("message.professionalismEmployees") }}</p>
               </li>
             </ul>
           </div>
@@ -92,10 +92,10 @@
             <img src="../assets/img/slide/slider.png" alt="slider" />
             <ul>
               <li>
-                <span>{{ $t("delivery") }}</span>
+                <span>{{ $t("message.delivery") }}</span>
               </li>
               <li>
-                <p>{{ $t("freeDeliveryCity") }}</p>
+                <p>{{ $t("message.freeDeliveryCity") }}</p>
               </li>
             </ul>
           </div>
@@ -103,56 +103,56 @@
             <img src="../assets/img/slide/slider3.png" alt="slidertick" />
             <ul>
               <li>
-                <span> {{ $t("quality") }}</span>
+                <span> {{ $t("message.quality") }}</span>
               </li>
               <li>
-                <p>{{ $t("sturdyPools") }}</p>
+                <p>{{ $t("message.sturdyPools") }}</p>
               </li>
             </ul>
           </div>
         </div>
       </div>
       <div class="water">
-        <h2>{{ $t("poolsInTashkent") }}</h2>
+        <h2>{{ $t("message.poolsInTashkent") }}</h2>
         <div class="habr">
           <div class="habr_hab">
             <ul>
               <li>
-                {{ $t("poolsAffordable") }} {{ $t("reliableEnvironmentally") }}
-                {{ $t("pureProducts") }} {{ $t("pleasantHoliday") }}
-                {{ $t("installedPerfectly") }} {{ $t("activelyUseIt") }}
-                {{ $t("duringSummer") }} {{ $t("vividEmotions") }}
-                {{ $t("summerDays") }}
+                {{ $t("message.poolsAffordable") }} {{ $t("message.reliableEnvironmentally") }}
+                {{ $t("message.pureProducts") }} {{ $t("message.pleasantHoliday") }}
+                {{ $t("message.installedPerfectly") }} {{ $t("message.activelyUseIt") }}
+                {{ $t("message.duringSummer") }} {{ $t("message.vividEmotions") }}
+                {{ $t("message.summerDays") }}
               </li>
             </ul>
           </div>
           <div class="nabr_hub">
             <ul class="ticks">
               <li>
-                {{ $t("poolsExtensive") }} {{ $t("listOfBenefits") }}
-                {{ $t("highlightMost") }}
+                {{ $t("message.poolsExtensive") }} {{ $t("message.listOfBenefits") }}
+                {{ $t("message.highlightMost") }}
               </li>
             </ul>
             <ul>
               <li>
                 <img src="../assets/img/tick.png" alt="tick" />
-                {{ $t("strength") }}
+                {{ $t("message.strength") }}
               </li>
               <li>
                 <img src="../assets/img/tick.png" alt="tick" />
-                {{ $t("easyInstall") }}
+                {{ $t("message.easyInstall") }}
               </li>
               <li>
                 <img src="../assets/img/tick.png" alt="tick" />
-                {{ $t("beautifulColors") }}
+                {{ $t("message.beautifulColors") }}
               </li>
               <li>
                 <img src="../assets/img/tick.png" alt="tick" />
-                {{ $t("stylishDesign") }}
+                {{ $t("message.stylishDesign") }}
               </li>
               <li>
                 <img src="../assets/img/tick.png" alt="tick" />
-                {{ $t("highQualityJust") }}
+                {{ $t("message.highQualityJust") }}
               </li>
             </ul>
           </div>

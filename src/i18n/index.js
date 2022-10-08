@@ -1,26 +1,4 @@
-
 import {createI18n} from 'vue-i18n'
-
-
-function loadLocaleMessages () {
-  // const locales = ()=> require.context('../languages', true, /[A-Za-z0-9-_,\s]+\.json$/i)
-  // const locales = import.meta.glob('../languages/ru.json')
-  const locales = {
-    '../languages/ru.json': () => import('../languages/ru.json'),
-    '../languages/uz.json': () => import('../languages/uz.json')
-  } 
-  const messages = {}
-  locales.keys().forEach(key => {
-    const matched = key.match(/([A-Za-z0-9-_]+)\./i)
-    if (matched && matched.length > 1) {
-      const locale = matched[1]
-      messages[locale] = locales(key)
-    }
-  })
-  return messages
-}
- 
-
 let currentLang = 'uz'
 let defaultLang = localStorage.getItem('language');
 if(defaultLang){
@@ -30,7 +8,128 @@ const i18n =  createI18n ({
   locale: currentLang,
   fallbackLocale: 'uz',
   formatFallbackMessages: true,
-  messages:loadLocaleMessages ()  ,
+  messages : {
+    ru: {
+      message:{
+          order : "Заказать",
+          setName : "Вы не ввели свое имя",
+          setNumber : "Ошибка номера телефона",
+          yourAddress : "Ваш адрес",
+          orderSuccess : "Ваш заказ успешно оформлен. Мь свяжемся с вами в ближайшее время",
+          name : "Имя",
+          number : "Телефон",
+          sezonOrder : "Сезонная распродажа",
+          freeDeliverPool : "Бесплатная доставка бассейна",
+          highQuality : "Мы ценим наших клиентов, можете быть уверены в качестве нашего сервиса!",
+          chemicalPresent : "Специальная химия в подарок",
+          freeClean : "Специальная очищающая химия для бассейна - бесплатно",
+          qualityAssurance : "Гарантия качества",
+          orginalProduct : "Вся продукция INTEX является оригинальной",
+          call : "Позвонить",
+          telegram : "Телеграм",
+          instagram : "Инстаграм",
+          freeConsultation : "Получить бесплатную консультацию",
+          toConsult : "Хочу проконсультироваться",
+          workTime : "Робочее время",
+          allReserved : "Разработано в Support Solutions Все права защищены",
+          thanks : "Спасибо",
+          yourOrderFramed : "Ваш заказ успешно оформлен. Мь свяжемся с вами в ближайшее время.",
+          freeDeliver : "Бесплатная доставка ",
+          orderFreeIn : "Бесплатная доставка осуществляется в пределах города Ташкент ",
+          orderPayOut : "(за пределами города  доставка оплачивается отдельно)",
+          checkout : "Оформить заказ",
+          getConsult : "Получить консультацию",
+          yourName : "Ваше имя",
+          yourNumber : "Ваш номер",
+          valuesClients : "Ценности наших клиентов",
+          experience : "Опыт",
+          professionalismEmployees : "Профессионализм наших сотрудников",
+          delivery : "Доставка",
+          freeDeliveryCity : "Бесплатная доставка по городу",
+          quality : "Качество",
+          sturdyPools : "Прочные, качественные бассейны",
+          poolsInTashkent : "Бассейны от intex в Ташкенте",
+          poolsAffordable : "Бассейны от intex - доступная по цене,",
+          reliableEnvironmentally : "качественная, надежная и экологически",
+          pureProducts : "чистая продукция, которая предназначена",
+          pleasantHoliday : "для приятного отдыха всей семьи.",
+          installedPerfectly : "Бассейн можно установить совершенно на",
+          activelyUseIt : "любом участке и активно пользоваться им",
+          duringSummer : "в летний период. Бассейн подарит вам",
+          vividEmotions : "яркие эмоции и спасет от жары в знойные",
+          summerDays : "летние дни.",
+          poolsExtensive : "Бассейны от intex отличаются обширным",
+          listOfBenefits : "перечнем преимуществ, из которых можно",
+          highlightMost : "выделить самые важные:",
+          strength : "Прочность",
+          easyInstall : "Простота установки",
+          beautifulColors : "Красивые и яркиe цвета",
+          stylishDesign : "Стильный дизайн",
+          highQualityJust : "Высокое качество",
+          money : "сум"
+      }
+    },
+    uz:{
+      message:{
+          order : "Buyurtma qilish",
+          setName : "Ismingizni kiriting",
+          setNumber : "Raqam noto'g'ri",
+          yourAddress : "Manzilingiz",
+          orderSuccess : "Buyurtmangiz muvaffaqiyatli ro'yxatdan o'tdi. Yaqin vaqt oralig'ida siz bilan bog'lanamiz",
+          name : "Ism",
+          number : "Raqamingiz",
+          sezonOrder : "Mavsumiy sotuvlar",
+          freeDeliverPool : "Bepul etkazib berish basseyni",
+          highQuality : "Biz mijozlarimizni qadrlaymiz, siz bizning xizmatimiz sifatiga amin bo'lishingiz mumkin!",
+          chemicalPresent : "Sovg'a sifatida maxsus kimyo",
+          freeClean : "Hovuz uchun maxsus tozalash kimyoviy moddalari - bepul",
+          qualityAssurance : "Sifat tekshiruvi",
+          orginalProduct : "Barcha INTEX mahsulotlari originaldir",
+          call : "Qo'ng'iroq qiling",
+          telegram : "Telegram",
+          instagram : "Instagram",
+          freeConsultation : "Bepul maslahat oling",
+          toConsult : "Men maslahatlashmoqchiman",
+          workTime : "Ish vaqti",
+          allReserved : "Support Solutions tomonidan ishlab chiqilgan Barcha huquqlar himoyalangan",
+          thanks : "Rahmat",
+          yourOrderFramed : "Buyurtmangiz muvaffaqiyatli joylashtirildi. Tez orada siz bilan bog'lanamiz.",
+          freeDeliver : "Yetkazib berish bepul",
+          orderFreeIn : "Toshkent shahri bo'ylab yetkazib berish bepul ",
+          orderPayOut : "(shahar tashqarisi  yetkazib berish alohida to'lanadi)",
+          checkout : "Buyurtmani rasmiylashtirish",
+          getConsult : "Maslahat olish uchun",
+          yourName : "Sizning ismingiz",
+          yourNumber : "Sizni raqamingiz",
+          valuesClients : "Mijozlarimizning qadriyatlari",
+          experience : "Tajriba",
+          professionalismEmployees : "Xodimlarimizning professionalligi",
+          delivery : "Yetkazib berish",
+          freeDeliveryCity : "Shahar ichida yetkazib berish bepul",
+          quality : "Sifat",
+          sturdyPools : "Mustahkam, sifatli basseynlar",
+          poolsInTashkent : "Toshkentdagi intex dan hovuzlar",
+          poolsAffordable : "Intex-dan basseynlar - arzon,",
+          reliableEnvironmentally : "yuqori sifatli, ishonchli va ekologik toza",
+          pureProducts : "mo'ljallangan sof mahsulotlar",
+          pleasantHoliday : "butun oila uchun yoqimli dam olish uchun.",
+          installedPerfectly : "Hovuz mukammal tarzda o'rnatilishi mumkin",
+          activelyUseIt : "har qanday sayt va undan faol foydalaning",
+          duringSummer : "yozgi davrda. Hovuz sizga beradi",
+          vividEmotions : "yorqin his-tuyg'ular va sizni issiqdan qutqaradi",
+          summerDays : "yoz kunlari.",
+          poolsExtensive : "Intex hovuzlari katta farq qiladi",
+          listOfBenefits : "mumkin bo'lgan imtiyozlar ro'yxati",
+          highlightMost : "eng muhimlarini ajratib ko'rsatish:",
+          strength : "Mustahkam",
+          easyInstall : "O'rnatish oson",
+          beautifulColors : "Chiroyli va yorqin ranglar",
+          stylishDesign : "Zamonaviy dizayn",
+          highQualityJust : "Yuqori sifatli",
+          money : "so'm"
+      }
+    }
+  }
 })
 export default i18n 
 

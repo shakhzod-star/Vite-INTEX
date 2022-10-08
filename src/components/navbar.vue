@@ -43,15 +43,15 @@
       <div class="socials">
         <a class="phone" :href="`tel:${site.phone_number}`">
           <img src="../assets/icons/social/phonee.svg" alt="phone" />
-          {{ $t("call") }}
+          {{ $t("message.call") }}
         </a>
         <a class="social" :href="site.telegram_link" target="_blank">
           <img src="../assets/icons/social/telegramm.svg" alt="telegram" />
-          {{ $t("telegram") }}
+          {{ $t("message.telegram") }}
         </a>
         <a class="social" :href="site.instagram_link" target="_blank">
           <img src="../assets/icons/social/instagramm.svg" alt="instagram" />
-          {{ $t("instagram") }}
+          {{ $t("message.instagram") }}
         </a>
       </div>
     </div>
@@ -70,14 +70,13 @@ export default {
   data() {
     return {
       BurgerActive: false,
-      site: {},
       isActive: false,
       navList: [],
       lang: "uz",
     };
   },
   computed: {
-    ...mapState (useCounterStore,["getSite", "getItems", "locale"]),
+    ...mapState (useCounterStore,["getSite", "getItems", "locale",'site']),
   },
   methods: {
     ...mapActions(useCounterStore,["fetchSite", "fetchCategories", "fetchLang"]),
@@ -93,7 +92,7 @@ export default {
     },
   },
   mounted() {
-    this.fetchSite().then(res => this.site = res).catch(error => console.log(error));
+    this.fetchSite()
     let locale = localStorage.getItem("language");
     if (locale == null) {
       this.fetchLang("uz");

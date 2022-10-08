@@ -1,7 +1,7 @@
 <template>
   <div class="season">
     <div class="bg">
-      <h2 class="Title">{{ $t("sezonOrder") }}!</h2>
+      <h2 class="Title">{{ $t("message.sezonOrder") }}!</h2>
     </div>
     <div class="columns">
       <div class="column" v-for="(column, index) in columns" :key="index">
@@ -21,16 +21,16 @@ export default {
     return {
       columns: [
         {
-          title: "freeDeliverPool",
-          subtitle: "highQuality",
+          title: "message.freeDeliverPool",
+          subtitle: "message.highQuality",
         },
         {
-          title: "chemicalPresent",
-          subtitle: "freeClean",
+          title: "message.chemicalPresent",
+          subtitle: "message.freeClean",
         },
         {
-          title: "qualityAssurance",
-          subtitle: "orginalProduct",
+          title: "message.qualityAssurance",
+          subtitle: "message.orginalProduct",
         },
       ],
     };

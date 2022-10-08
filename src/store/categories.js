@@ -24,33 +24,13 @@ export const useCounterStore = defineStore("counter", {
   actions: {
     fetchBotOrder(data) {
       let allUserInfo = `Name: ${data.name}   \n  Number: ${data.phoneNumber}   \n  Address: ${data.address} `;
-      return new Promise((resolve, reject) => {
-        axios
-          .post(
-            `https://api.telegram.org/bot${this.botToken}sendMessage?chat_id=${this.chatId}&text=${allUserInfo}`
-          )
-          .then((res) => resolve(res))
-          .catch((e) => {
-            console.error(e);
-            reject()
-          });
-      });
-    },
+        axios.post(`https://api.telegram.org/bot${this.botToken}sendMessage?chat_id=${this.chatId}&text=${allUserInfo}`)
+      },
+
     fetchBotConsultation(data) {
       let allUserInfo = `Name: ${data.name} \n Number: ${data.phoneNumber} `;
-      return new Promise((resolve, reject) => {
-        axios
-          .post(
-            `https://api.telegram.org/bot${this.botToken}sendMessage?chat_id=${this.chatId}&text=${allUserInfo}`
+        axios.post(`https://api.telegram.org/bot${this.botToken}sendMessage?chat_id=${this.chatId}&text=${allUserInfo}`
           )
-          .then((res) => {
-            resolve(res);
-          })
-          .catch((e) => {
-            console.error(e);
-            reject();
-          });
-      });
     },
     fetchCategories() {
       const products = useProducts()
@@ -63,22 +43,12 @@ export const useCounterStore = defineStore("counter", {
             console.log('err',e)
           })
     },
-    fetchSite(ctx) {
-      return new Promise((resolve, reject) => {
-        axios
-          .get(this.backend_url + "api/home/site")
-          .then((res) => {
-            resolve(res?.data?.data[0]);
-            this.updateSite(res?.data?.data[0]);
-            // ctx.commit("updateSite", res?.data?.data[0]);
-          })
-          .catch((error) => {
-            reject(error);
-          });
-      });
+    fetchSite() {
+        axios.get(this.backend_url + "api/home/site")
+             .then(res => this.site = res?.data?.data[0])
+            .catch(error => { console.log(error);});
     },
-    //POST Order
-    fetchOrder(ctx, data) {
+    fetchOrder(data) {
       return new Promise((resolve, reject) => {
         axios
           .post(this.backend_url + "api/home/order", data, {
@@ -112,18 +82,8 @@ export const useCounterStore = defineStore("counter", {
           });
       });
     },
-
     fetchLang(data) {
-        
+        this.locale = data
     },
-    updateLang(payload) {
-
-      this.locale = payload.locale;
-      console.log(this.locale);
-    },
-    updateSite(payload) {
-      this.site = payload;
-    },
-   
   }
 });
