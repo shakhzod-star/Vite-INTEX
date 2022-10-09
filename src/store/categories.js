@@ -49,38 +49,32 @@ export const useCounterStore = defineStore("counter", {
             .catch(error => { console.log(error);});
     },
     fetchOrder(data) {
-      return new Promise((resolve, reject) => {
-        axios
+        return  axios
           .post(this.backend_url + "api/home/order", data, {
             headers: {
               "content-type": "application/json",
             },
           })
           .then((res) => {
-            resolve(res);
+            return res
           })
           .catch((e) => {
             console.error(e);
-            reject(e);
           });
-      });
-    },
-    // POST Consultation
-    fetchConsultation(ctx, data) {
-      return new Promise((resolve, reject) => {
-        axios
+     },
+    fetchConsultation( data) {
+        return    axios
           .post(this.backend_url + "api/home/consultation", data, {
             headers: {
               "content-type": "application/json",
             },
           })
           .then((res) => {
-            resolve(res);
+            return res
           })
           .catch((err) => {
-            reject(err);
+           console.log(err);
           });
-      });
     },
     fetchLang(data) {
         this.locale = data

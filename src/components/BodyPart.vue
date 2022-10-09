@@ -39,7 +39,7 @@
           </p>
           <input
             :class="v$.form.number.$error ? 'form-error' : ''"
-            v-mask="'+998## #######'"
+          v-mask="{mask: '+998NN NNNNNNN' }"
             v-model.trim="form.number"
             type="text"
             :placeholder="$t('message.yourNumber')"

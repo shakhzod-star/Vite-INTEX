@@ -15,7 +15,7 @@
         </p>
         <input
           type="text"
-          v-mask="'+998## #######'"
+          v-mask="{mask: '+998NN NNNNNNN' }"
           v-model.trim="form.number"
           :placeholder="$t('message.number')"
           :aria-label="$t('message.number')"
@@ -24,7 +24,9 @@
         <p class="p-valid" :style="v$.form.number.$error ? 'opacity: 1' : ''">
           {{ $t("message.setNumber") }}
         </p>
-        <button class="consult" :disabled="disabled">{{ $t("message.toConsult") }}</button>
+        <button class="consult" :disabled="disabled">
+          {{ $t("message.toConsult") }}
+        </button>
       </form>
       <div class="dateAdd">
         <div class="DateTime">
@@ -33,7 +35,7 @@
             <p>{{ $t("message.workTime") }}</p>
           </div>
           <div class="relax">
-            {{     site[`work_time_${locale}`]  }}
+            {{ site[`work_time_${locale}`] }}
           </div>
           <div class="social">
             <a :href="`tel:${site.phone_number}`"
@@ -80,7 +82,7 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { useCounterStore } from '../store/categories'
+import { useCounterStore } from "../store/categories";
 import useVuelidate from "../../node_modules/@vuelidate/core";
 import { required, minLength } from "../../node_modules/@vuelidate/validators";
 export default {
@@ -91,7 +93,7 @@ export default {
     return {
       successModal: false,
       form: {},
-      disabled : false
+      disabled: false,
     };
   },
   validations() {
@@ -103,12 +105,16 @@ export default {
     };
   },
   computed: {
-    ...mapState(useCounterStore,["site", "locale"]),
+    ...mapState(useCounterStore, ["site", "locale"]),
   },
   methods: {
-    ...mapActions(useCounterStore,["fetchConsultation", "fetchSite", "fetchBotConsultation"]),
+    ...mapActions(useCounterStore, [
+      "fetchConsultation",
+      "fetchSite",
+      "fetchBotConsultation",
+    ]),
     save() {
-      this.disabled = true
+      this.disabled = true;
       this.v$.$validate();
       if (!this.v$.$error) {
         let newForm = {
@@ -123,7 +129,7 @@ export default {
               this.v$.form.name = false;
               this.v$.form.number = false;
               this.successModal = true;
-              this.disabled = false
+              this.disabled = false;
             }
             setTimeout(() => {
               this.successModal = false;
@@ -136,8 +142,7 @@ export default {
       }
     },
   },
-  mounted() {
-  },
+  mounted() {},
 };
 </script>
 

@@ -100,7 +100,7 @@
               </p>
               <input
                 type="text"
-                v-mask="'+998## #######'"
+                v-mask="{mask: '+998NN NNNNNNN' }"
                 v-model.trim="form.number"
                 :placeholder="$t('message.number')"
                 :aria-label="$t('message.number')"
@@ -188,7 +188,7 @@ export default {
     return {
       form: {
         name: { required },
-        number: { required, minLength: minLength(14) },
+        number: { required, minLength: minLength(13) },
         address: { required },
       },
     };
@@ -233,7 +233,8 @@ export default {
           phoneNumber: this.form.number.slice(4),
           address: this.form.address,
         };
-        this.fetchOrder(newForm).then((res) => {
+        this.fetchOrder(newForm)
+        .then((res) => {
             if (res.status == 201) {
               this.carcasModal = false;
               this.form.name = "";
