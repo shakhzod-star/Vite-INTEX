@@ -6,17 +6,14 @@ export const useProducts = defineStore("products", {
   state: () => ({
     products : [],
     counter : 0,
-    max : 100,
+    max : 5,
   }),
   actions: {
-    fetchProducts() {
+     fetchProducts() {
       const category = useCounterStore()
-      axios.get(category.backend_url + "api/home/product")
-      .then(({data}) => this.products = data.data)
+    return  axios.get(category.backend_url + "api/home/product")
+      .then(({data}) =>  this.products = data.data)
       .catch(e => console.log('product-error',e));
-    },
-    increment(){
-       this.counter++
     },
   },
   getters:{
