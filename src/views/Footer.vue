@@ -81,21 +81,14 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "pinia";
-import { useCounterStore } from "../store/categories";
-import useVuelidate from "../../node_modules/@vuelidate/core";
 import { required, minLength } from "../../node_modules/@vuelidate/validators";
+import useVuelidate from "../../node_modules/@vuelidate/core";
+import footer from '../Mixins/Footer'
 export default {
-  setup() {
+mixins : [footer],
+setup() {
     return { v$: useVuelidate() };
-  },
-  data() {
-    return {
-      successModal: false,
-      form: {},
-      disabled: false,
-    };
-  },
+  },  
   validations() {
     return {
       form: {
@@ -104,45 +97,7 @@ export default {
       },
     };
   },
-  computed: {
-    ...mapState(useCounterStore, ["site", "locale"]),
-  },
-  methods: {
-    ...mapActions(useCounterStore, [
-      "fetchConsultation",
-      "fetchSite",
-      "fetchBotConsultation",
-    ]),
-    save() {
-      this.disabled = true;
-      this.v$.$validate();
-      if (!this.v$.$error) {
-        let newForm = {
-          name: this.form.name,
-          phoneNumber: this.form.number.slice(4),
-        };
-        this.fetchConsultation(newForm)
-          .then((res) => {
-            if (res.status == 201) {
-              this.form.name = "";
-              this.form.number = "";
-              this.v$.form.name = false;
-              this.v$.form.number = false;
-              this.successModal = true;
-              this.disabled = false;
-            }
-            setTimeout(() => {
-              this.successModal = false;
-            }, 5000);
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-        this.fetchBotConsultation(newForm);
-      }
-    },
-  },
-  mounted() {},
+
 };
 </script>
 

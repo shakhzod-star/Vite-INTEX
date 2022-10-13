@@ -34,8 +34,7 @@ export const useCounterStore = defineStore("counter", {
     },
     fetchCategories() {
       const products = useProducts()
-      axios
-          .get(this.backend_url + "api/home/category")
+      axios.get(this.backend_url + "api/home/category")
           .then(({data}) => {
             products.fetchProducts()
             this.categories= data.data

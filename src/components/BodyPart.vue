@@ -162,70 +162,11 @@
   </div>
 </template>
 <script>
-import { mapActions } from "pinia";
-import { useCounterStore } from '../store/categories'
-import useVuelidate from "../../node_modules/@vuelidate/core";
-import { required, minLength } from "../../node_modules/@vuelidate/validators";
+import BodyPart from '../Mixins/BodyPart'
 export default {
-  setup() {
-    return { v$: useVuelidate() };
-  },
-  data() {
-    return {
-      modal: false,
-      successModal: false,
-      disabled: false,
-      form: {},
-    };
-  },
-  validations() {
-    return {
-      form: {
-        name: { required },
-        number: { required, minLength: minLength(14) },
-      },
-    };
-  },
-  mounted() {},
-  methods: {
-    ...mapActions(useCounterStore,["fetchConsultation", "fetchBotConsultation"]),
-    save() {
-      this.disabled = true
-      this.v$.$validate();
-      if (!this.v$.$error) {
-        let newForm = {
-          name: this.form.name,
-          phoneNumber: this.form.number.slice(4)
-        };
-        this.fetchConsultation(newForm)
-          .then((res) => {
-            if (res.status == 201) {
-              this.modal = !this.modal;
-              this.successModal = !this.successModal;
-              this.form.name = "";
-              this.form.number = "";
-            }
-            this.v$.form.name = false;
-            this.v$.form.number = false;
-            this.disabled = false
-            setTimeout(() => {
-              this.successModal = false;
-            }, 5000);
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-        this.fetchBotConsultation(newForm);
-      }
-    },
-    outClick() {
-      if (!this.v$.$error) {
-        this.modal = false;
-        this.successModal = false;
-      }
-    },
-  },
-};
+  mixins: [BodyPart]
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -467,8 +408,6 @@ export default {
 @media (max-width: 1250px) {
   .ours {
     .ours_clients {
-      h2 {
-      }
       .ours_link {
         flex-direction: column;
         align-items: start;
@@ -476,59 +415,16 @@ export default {
         margin-right: auto;
         width: 700px;
         padding: 0 25px;
-        .box {
-          img {
-          }
-          ul {
-            li {
-            }
-          }
-          span {
-          }
-          p {
-          }
-        }
-        .box:last-child {
-        }
-      }
-    }
-    .water {
-      h2 {
-      }
-      .habr {
-        li {
-        }
-        img {
-        }
+      
+       
       }
     }
   }
 }
 @media (max-width: 1000px) {
   .ours {
-    .ours_clients {
-      h2 {
-      }
-      .ours_link {
-        .box {
-          img {
-          }
-          ul {
-            li {
-            }
-          }
-          span {
-          }
-          p {
-          }
-        }
-        .box:last-child {
-        }
-      }
-    }
     .water {
-      h2 {
-      }
+     
       .habr {
         flex-direction: column;
         align-items: start;
@@ -543,10 +439,6 @@ export default {
             }
           }
         }
-        li {
-        }
-        img {
-        }
       }
     }
   }
@@ -554,24 +446,8 @@ export default {
 @media (max-width: 750px) {
   .ours {
     .ours_clients {
-      h2 {
-      }
       .ours_link {
         width: 100%;
-        .box {
-          img {
-          }
-          ul {
-            li {
-            }
-          }
-          span {
-          }
-          p {
-          }
-        }
-        .box:last-child {
-        }
       }
     }
     .water {
@@ -581,12 +457,6 @@ export default {
       }
       .habr {
         align-items: flex-start;
-        .habr_hab {
-        }
-        li {
-        }
-        img {
-        }
       }
     }
   }
@@ -606,26 +476,6 @@ export default {
             width: 70px;
             height: 70px;
           }
-          ul {
-            li {
-              span {
-              }
-              p {
-              }
-            }
-          }
-        }
-        .box:last-child {
-        }
-      }
-    }
-    .water {
-      h2 {
-      }
-      .habr {
-        li {
-        }
-        img {
         }
       }
     }
@@ -684,13 +534,9 @@ export default {
   }
   .ours {
     .ours_clients {
-      h2 {
-      }
       .ours_link {
         margin-bottom: 20px;
         .box {
-          img {
-          }
           ul {
             li {
               span {
@@ -704,8 +550,6 @@ export default {
             }
           }
         }
-        .box:last-child {
-        }
       }
     }
     .water {
@@ -718,8 +562,6 @@ export default {
         li {
           font-size: 16px;
           line-height: 20px;
-        }
-        img {
         }
       }
     }

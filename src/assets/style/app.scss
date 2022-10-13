@@ -377,26 +377,6 @@ line-height: 21px;
     justify-content: center !important;
     .pool {
       margin-right: 30px !important;
-      .status {
-      }
-      .poolName {
-      }
-      img {
-      }
-      .poolComment {
-      }
-      .price_order {
-        .price {
-          span {
-          }
-          span:before {
-          }
-          p {
-          }
-        }
-        .order {
-        }
-      }
     }
     .pool:nth-child(3n) {
       margin-right: 30px !important;
@@ -418,25 +398,9 @@ line-height: 21px;
       max-width: 260px;
     display: flex;
     flex-direction: column;
-      .status {
-      }
-      .poolName {
-      }
-      img {
-      }
-      .poolComment {
-      }
       .price_order {
         .price {
           margin-right: 8px;
-          span {
-          }
-          span:before {
-          }
-          p {
-          }
-        }
-        .order {
         }
       }
     }

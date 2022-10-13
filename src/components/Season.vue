@@ -106,16 +106,7 @@ export default {
 
       .column {
         margin-bottom: 30px;
-        .number {
-        }
-        .text {
-          .title {
-          }
-          .subtitle {
-          }
-        }
-      }
-      .column:last-child {
+      
       }
     }
   }
@@ -133,14 +124,6 @@ export default {
 
       .column {
         margin: 0 0 30px 0;
-        .number {
-        }
-        .text {
-          .title {
-          }
-          .subtitle {
-          }
-        }
         &:last-child {
           margin-bottom: 0;
         }
@@ -168,11 +151,7 @@ export default {
             font-size: 18px;
             line-height: 20px;
           }
-          .subtitle {
-          }
         }
-      }
-      .column:last-child {
       }
     }
   }
