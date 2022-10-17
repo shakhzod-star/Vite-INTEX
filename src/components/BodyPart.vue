@@ -4,24 +4,24 @@
       <div class="modalPart">
         <h2 class="Title">{{ $t("message.freeDeliver") }}</h2>
         <p class="text">{{ $t("message.orderFreeIn") }} {{ $t("message.orderPayOut") }}</p>
-        <button  class="add" @click="modal = !modal">
+        <button class="add" :class="{ active: modal }" @click="ModalClose">
           {{ $t("message.checkout")}} 
         </button>
       </div>
-      <div v-if="modal || successModal" class="bgModal" @click="outClick"></div>
+      <div v-show="modal || successModal" class="bgModal" @click="outClick"></div>
       <Transition name="bounce" >
         <form v-if="modal" class="modal" @submit.prevent="save">
-          <img
-            class="cross"
-            @click="modal = false"
-            src="../assets/icons/Modal/cross.png"
-            alt="cross"
-          />
-          <img
-            class="feedback"
-            src="../assets/icons/Modal/feedback.png"
-            alt="feedback"
-          />
+            <img
+              class="cross"
+              @click="modal = false"
+              src="../assets/icons/Modal/cross.png"
+              alt="cross"
+            />
+            <img
+                  class="feedback"
+                  src="../assets/icons/Modal/feedback.png"
+                  alt="feedback"
+                />
           <p class="text">{{ $t("message.getConsult") }}</p>
           <input
             :class="v$.form.name.$error ? 'form-error' : ''"
@@ -162,9 +162,24 @@
   </div>
 </template>
 <script>
+
+import useVuelidate from "../../node_modules/@vuelidate/core";
+import { required, minLength } from "../../node_modules/@vuelidate/validators";
 import BodyPart from '../Mixins/BodyPart'
 export default {
-  mixins: [BodyPart]
+  mixins: [BodyPart],
+  setup() {
+        return { v$: useVuelidate() };
+      },
+  validations() {
+  return {
+    form: {
+      name: { required },
+      number: { required, minLength: minLength(14) },
+    },
+  };
+},
+
 }
 
 </script>

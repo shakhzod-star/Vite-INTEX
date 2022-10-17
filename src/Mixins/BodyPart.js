@@ -1,11 +1,7 @@
 import { mapActions } from "pinia";
-import { useCounterStore } from '../store/categories'
-import useVuelidate from "../../node_modules/@vuelidate/core";
-import { required, minLength } from "../../node_modules/@vuelidate/validators";
+import { useCategoriesStore } from '../store/categories'
 export default { 
-    setup() {
-        return { v$: useVuelidate() };
-      },
+    
       data() {
         return {
           modal: false,
@@ -14,16 +10,9 @@ export default {
           form: {},
         };
       },
-      validations() {
-        return {
-          form: {
-            name: { required },
-            number: { required, minLength: minLength(14) },
-          },
-        };
-      },
+    
       methods: {
-        ...mapActions(useCounterStore,["fetchConsultation", "fetchBotConsultation"]),
+        ...mapActions(useCategoriesStore,["fetchConsultation", "fetchBotConsultation"]),
         save() {
           this.disabled = true
           this.v$.$validate();
@@ -59,5 +48,9 @@ export default {
             this.successModal = false;
           }
         },
+        ModalClose(){
+          this.modal = !this.modal
+          console.log('modal :', this.modal);
+        }
       },
 }

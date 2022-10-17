@@ -1,4 +1,5 @@
 import {createI18n} from 'vue-i18n'
+
 let currentLang = 'uz'
 let defaultLang = localStorage.getItem('language');
 if(defaultLang){

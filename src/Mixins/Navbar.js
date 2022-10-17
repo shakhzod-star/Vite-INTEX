@@ -1,6 +1,6 @@
 
 import { mapActions, mapState  } from "pinia";
-import { useCounterStore } from '../store/categories'
+import { useCategoriesStore } from '../store/categories'
 
 export default {
     data() {
@@ -12,10 +12,10 @@ export default {
         };
       },
       computed: {
-        ...mapState (useCounterStore,["getSite", "getItems", "locale",'site']),
+        ...mapState (useCategoriesStore,["getSite", "getItems", "locale",'site']),
       },
       methods: {
-        ...mapActions(useCounterStore,["fetchSite", "fetchCategories", "fetchLang"]),
+        ...mapActions(useCategoriesStore,["fetchSite", "fetchCategories", "fetchLang"]),
         setLocale() {
           this.isActive = !this.isActive;
           if (this.isActive && this.locale != "ru") {

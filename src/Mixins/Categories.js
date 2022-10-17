@@ -3,7 +3,7 @@ import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 import { mapActions, mapState } from "pinia";
 import useVuelidate from "@vuelidate/core";
 import { required, minLength } from "@vuelidate/validators";
-import { useCounterStore } from "../store/categories";
+import { useCategoriesStore } from "../store/categories";
 export default {
     components: {
         PulseLoader,
@@ -38,11 +38,11 @@ export default {
         };
       },
       computed: {
-        ...mapState(useCounterStore, ["getItems","categories","locale","order"])
+        ...mapState(useCategoriesStore, ["getItems","categories","locale","order"])
     
       },
       methods: {
-        ...mapActions(useCounterStore, [
+        ...mapActions(useCategoriesStore, [
           "fetchCategories",
           "fetchOrder",
           "fetchBotOrder",

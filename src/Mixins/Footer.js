@@ -1,5 +1,5 @@
 import { mapActions, mapState } from "pinia";
-import { useCounterStore } from "../store/categories";
+import { useCategoriesStore } from "../store/categories";
 export default {
   
   data() {
@@ -11,10 +11,10 @@ export default {
   },
  
   computed: {
-    ...mapState(useCounterStore, ["site", "locale"]),
+    ...mapState(useCategoriesStore, ["site", "locale"]),
   },
   methods: {
-    ...mapActions(useCounterStore, [
+    ...mapActions(useCategoriesStore, [
       "fetchConsultation",
       "fetchSite",
       "fetchBotConsultation",
